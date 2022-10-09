@@ -1,24 +1,43 @@
+import binascii
 from Algorithms.DES import DES
 from Crypto.Cipher import AES
 from Operations.ECBOperation import ECBOperation
 from Operations.OFBOperation import OFBOperation
+from Operations.CFBOperation import CFBOperation
 from Crypto.Util.Padding import pad
 
 des = DES()
 des.setDebug(False)
 
+# DES Encryption
 ciphertext = des.encrypt('plaintex', 'keyaakey')
 
 print('Cipher Text: ', ciphertext)
 
+# ECBOperation
 ecb = ECBOperation()
 ciphertext = ecb.encrypt(des, 'plaintexplaintex', 'keyaakey')
 
 print('ECB Cipher Text: ', ciphertext)
 
+# OFBOperation
 ofb = OFBOperation()
 key = pad(b"keykey", AES.block_size)
 iv = pad(b"iviv",AES.block_size)
 ciphertext = ofb.encrypt('AES', 'plaintextex', key , iv)
 
 print('OFB Cipher Text: ', ciphertext)
+
+# CFBOperation
+cfb = CFBOperation()
+
+# Encrypt
+key = pad(b"randomkey", AES.block_size)
+iv = pad(b"randomiv", AES.block_size)
+CFBchipertext = cfb.encrypt('AES', 'thisisplaintext', key, iv)
+
+print('CFB Cipher Text: ', CFBchipertext)
+
+# Decrypt
+CFBplaintext = cfb.decrypt('AES', CFBchipertext, key, iv)
+print('CFB Plain Text: ', CFBplaintext)
