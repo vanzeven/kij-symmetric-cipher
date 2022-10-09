@@ -1,8 +1,14 @@
 from Algorithms.DES import DES
-from Operations.CTROperation import CTROperation
+from Operations.ECBOperation import ECBOperation
 
 des = DES()
-ciphertext = des.encrypt('plaintext', 'key')
+des.setDebug(False)
 
-ctr = CTROperation()
-ciphertext = ctr.encrypt(des, 'plaintext', 'key', 'iv')
+ciphertext = des.encrypt('plaintex', 'keyaakey')
+
+print('Cipher Text: ', ciphertext)
+
+ecb = ECBOperation()
+ciphertext = ecb.encrypt(des, 'plaintexplaintex', 'keyaakey')
+
+print('ECB Cipher Text: ', ciphertext)
