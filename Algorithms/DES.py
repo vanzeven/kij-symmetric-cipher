@@ -4,6 +4,8 @@ from Algorithms.Algorithm import Algorithm
 
 class DES(Algorithm):
     def __init__(self):
+        self.debugMode = False
+
         self.ipBox = [ 58, 50, 42, 34, 26, 18, 10, 2,
                       60, 52, 44, 36, 28, 20, 12, 4,
                       62, 54, 46, 38, 30, 22, 14, 6,
@@ -205,40 +207,40 @@ class DES(Algorithm):
         return result
 
     def xorSwap(self, lpt, rpt, key, roundNumber):
-        print('Round Number: ', roundNumber)
+        self.debug('Round Number: ', roundNumber)
 
         reducedKey = self.keyReduction(key) # 64-bit to 56-bit
-        print('Reduced Key: ', reducedKey)
+        self.debug('Reduced Key: ', reducedKey)
 
         transformedKey = self.keyTransformation(reducedKey, roundNumber) # 56-bit shifted
-        print('Transformed Key: ', transformedKey)
+        self.debug('Transformed Key: ', transformedKey)
 
         compressedKey = self.compressionPermutation(transformedKey) # 56-bit shifted to 48-bit shifted
-        print('Compressed Key: ', compressedKey)
+        self.debug('Compressed Key: ', compressedKey)
 
         expandedRpt = self.expansionPermutation(rpt) # 32-bit to 48-bit
-        print('Expanded RPT: ', expandedRpt)
+        self.debug('Expanded RPT: ', expandedRpt)
 
         outputRpt = self.xorBin(expandedRpt, compressedKey) # 48-bit xored rpt and key
-        print('Output RPT: ', outputRpt)
+        self.debug('Output RPT: ', outputRpt)
 
         sBoxedOutputRpt = self.sBoxSubtitution(outputRpt) # 48-bit to 32-bit
-        print('S-BOXed Output RPT: ', sBoxedOutputRpt)
+        self.debug('S-BOXed Output RPT: ', sBoxedOutputRpt)
 
         pBoxedOutputRpt = self.pBoxPermutation(sBoxedOutputRpt) # 32-bit permutation
-        print('P-BOXed Output RPT: ', pBoxedOutputRpt)
+        self.debug('P-BOXed Output RPT: ', pBoxedOutputRpt)
 
         finalLpt = rpt
         finalRpt = self.xorBin(lpt, pBoxedOutputRpt)
 
-        print('Final LPT: ', finalLpt)
-        print('Final RPT: ', finalRpt)
+        self.debug('Final LPT: ', finalLpt)
+        self.debug('Final RPT: ', finalRpt)
 
         finalString = finalLpt + finalRpt
 
-        print('Final String: ', finalString)
+        self.debug('Final String: ', finalString)
 
-        print()
+        self.debug()
 
         return finalString
 
@@ -290,3 +292,9 @@ class DES(Algorithm):
         
         return result    
         
+    def setDebug(self, active):
+        self.debugMode = active
+
+    def debug(self, *string):
+        if self.debugMode:
+            print(string)
