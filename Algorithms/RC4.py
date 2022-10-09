@@ -1,6 +1,7 @@
 import codecs
 
 MOD = 256
+# reference https://github.com/manojpandey/rc4/
 
 
 def KSA(key):
