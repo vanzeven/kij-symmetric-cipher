@@ -7,19 +7,26 @@ from Operations.OFBOperation import OFBOperation
 from Operations.CFBOperation import CFBOperation
 from Crypto.Util.Padding import pad
 
+ciphertext = 'plaintexuntasapi'
+key = 'keyaakey'
+
 des = DES()
 des.setDebug(False)
 
 # DES Encryption
-ciphertext = des.encrypt('plaintex', 'keyaakey')
+cipherbytes = des.encrypt(bytes('plaintex', 'utf-8'), key)
 
-print('Cipher Text: ', ciphertext)
+print('Cipher Bytes: ', cipherbytes)
 
 # ECBOperation
 ecb = ECBOperation()
-ciphertext = ecb.encrypt(des, 'plaintexplaintex', 'keyaakey')
 
-print('ECB Cipher Text: ', ciphertext)
+cipherbytes = ecb.encrypt(des, bytes(ciphertext, 'utf-8'), key)
+plainbytes = ecb.decrypt(des, cipherbytes, key)
+
+print('ECB Cipher Text: ', cipherbytes)
+print('ECB Plain Text: ', plainbytes)
+print()
 
 # OFBOperation
 ofb = OFBOperation()
