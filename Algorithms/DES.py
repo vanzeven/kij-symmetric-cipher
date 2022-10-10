@@ -1,8 +1,57 @@
 from Algorithms.Algorithm import Algorithm
 
-# Reference: https://www.geeksforgeeks.org/data-encryption-standard-des-set-1/
+from des import DesKey
 
 class DES(Algorithm):
+    def __init__(self):
+        self.debugMode = False
+
+    def setDebug(self, active):
+        self.debugMode = active
+
+    def debug(self, *string):
+        if self.debugMode:
+            print(string)
+
+    def encrypt(self, plainbytes, key):
+        # 64 bit
+        # 8 character
+        # 8-bit per character
+
+        if len(plainbytes) != 8:
+            print('Plainbytes Must be 64-bit')
+            return None
+
+        if len(key) != 8:
+            print('Key Must be 64-bit')
+            return None
+
+        key0 = DesKey(bytes(key, 'utf-8'))
+        cipherbytes = key0.encrypt(plainbytes)
+
+        return cipherbytes
+
+    def decrypt(self, cipherbytes, key):
+        # 64 bit
+        # 8 character
+        # 8-bit per character
+
+        if len(cipherbytes) != 8:
+            print('Plaintext Must be 64-bit')
+            return None
+
+        if len(key) != 8:
+            print('Key Must be 64-bit')
+            return None
+
+        key0 = DesKey(bytes(key, 'utf-8'))
+        plainbytes = key0.decrypt(cipherbytes)
+
+        return plainbytes
+
+# Reference: https://www.geeksforgeeks.org/data-encryption-standard-des-set-1/
+
+class DESManual(Algorithm):
     def __init__(self):
         self.debugMode = False
 
