@@ -9,7 +9,7 @@ class CTROperation(Operation):
             print('Key must be 64-bit length')
             return None
 
-        result = ''
+        result = b''
 
         prime = 171923
         multiplier = 37438482
@@ -20,18 +20,43 @@ class CTROperation(Operation):
 
             counterPlaintext = str(counter).zfill(8)
 
-            encryptedCounter = algorithmClass.encrypt(counterPlaintext, key)
+            encryptedCounter = algorithmClass.encrypt(bytes(counterPlaintext, 'utf-8'), key)
 
             chunk = plaintext[i:i+8]
 
-            xoredChunk = self.xorString(chunk, encryptedCounter)
+            # xoredChunk = self.xorString(chunk, encryptedCounter)
+            # xoredChunk = chunk ^ encryptedCounter
+            xoredChunk = self.byte_xor(chunk, encryptedCounter)
 
             result += xoredChunk
 
         return result
 
     def decrypt(self, algorithmClass, ciphertext, key, iv):
-        pass
+        if len(key) != 8:
+            print('Key must be 64-bit length')
+            return None
+
+        result = b''
+
+        prime = 171923
+        multiplier = 37438482
+        counter = iv
+
+        for i in range(0, len(ciphertext), 8):
+            counter += (iv * multiplier) % prime
+
+            xoredChunk = ciphertext[i:i+8]
+
+            counterPlaintext = str(counter).zfill(8)
+
+            encryptedCounter = algorithmClass.encrypt(bytes(counterPlaintext, 'utf-8'), key)
+
+            unxoredChunk = self.byte_xor(encryptedCounter, xoredChunk)
+
+            result += unxoredChunk
+
+        return result
 
     def xorString(self, strA, strB):
         arrA = list(strA)
@@ -39,7 +64,7 @@ class CTROperation(Operation):
 
         minLen = min(len(arrA), len(arrB))
 
-        result = ''
+        result = b''
 
         for i in range(minLen):
             xoredOrd = ord(arrA[i]) ^ ord(arrB[i])
@@ -48,3 +73,6 @@ class CTROperation(Operation):
             result += xoredChar
 
         return result
+
+    def byte_xor(self, ba1, ba2):
+        return bytes([_a ^ _b for _a, _b in zip(ba1, ba2)])
