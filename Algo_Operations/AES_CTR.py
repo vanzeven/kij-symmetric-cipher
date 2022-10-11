@@ -16,9 +16,6 @@ class AES_CTR:
         self.ctr = sum_ctr
 
         self.counter = Counter.new(128, initial_value=self.ctr)
-
-    def counter(self):
-        return 3
         
     def encrypt(self, plaintext):
         padded_bytes = pad(plaintext, AES.block_size)
@@ -27,7 +24,6 @@ class AES_CTR:
         return chipertext
 
     def decrypt(self, ciphertext):
-        ctr = Counter.new(128, initial_value=38)
         AES_obj = AES.new(self.key, AES.MODE_CTR, counter=self.counter)
         raw_bytes = AES_obj.decrypt(ciphertext)
         extracted_bytes = unpad(raw_bytes, AES.block_size)
