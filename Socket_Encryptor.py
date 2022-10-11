@@ -13,7 +13,6 @@ from Algo_Operations.DES_OFB import DES_CTR
 from Algo_Operations.RC4_STM import RC4_STM
 
 from Algorithms.DES import DES
-from Algorithms.RC4 import RC4
 from Algo_Operations.DES_CTR import *
 from Operations.ECBOperation import ECBOperation
 from Operations.CTROperation import CTROperation

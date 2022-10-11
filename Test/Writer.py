@@ -1,7 +1,6 @@
 import csv
-import pandas as pd
 
-array = [None] * 22
+array = [None] * 10
 
 
 class Writer:
@@ -13,8 +12,7 @@ class Writer:
 
     def write_csv(self, filename):
         filename = "csv/" + filename
-        file = open(filename, 'w')
+        file = open(filename, 'a+', newline='')
         writer = csv.writer(file)
         writer.writerow(array)
         file.close()
-        pd.read_csv(filename, header=None).T.to_csv(filename, header=False, index=False)
