@@ -115,20 +115,20 @@ if __name__=='__main__':
     running = True
     while running:
         print('Provide a command:')
-        command = input()
+        command = input('> ')
         command = command.upper()
 
         if command == 'LIST':
             remote_list()
         elif command == 'GET':
             print('Provide a file name to download:')
-            filename = input()
+            filename = input('> ')
             remote_get(filename=filename)
         elif command == 'HELP':
             remote_help()
         elif command == 'POST':
             print('Provide a file name to upload:')
-            filename = input()
+            filename = input('> ')
             remote_get(filename=filename)
         elif command == 'EXIT':
             running = False
