@@ -5,6 +5,8 @@ import logging
 import os.path
 import os
 
+userpath = None
+
 server_address=('localhost',7777)
 
 def send_command(command_str=""):
@@ -54,13 +56,15 @@ def remote_list():
         return False
 
 def remote_get(filename=""):
+    global userpath
+
     command_str=f"GET {filename}"
     hasil = send_command(command_str)
     if (hasil['status']=='OK'):
         #proses file dalam bentuk base64 ke bentuk bytes
         namafile= hasil['data_namafile']
         isifile = base64.b64decode(hasil['data_file'])
-        fp = open(namafile,'wb+')
+        fp = open(os.path.join(userpath, namafile),'wb+')
         fp.write(isifile)
         fp.close()
         return True
@@ -117,7 +121,8 @@ if __name__=='__main__':
     basepath = 'files/'
     userpath = os.path.join(basepath, username + '_files')
 
-    os.mkdir(userpath)
+    if os.path.exists(userpath) == False:
+        os.mkdir(userpath)
 
     remote_help()
 
