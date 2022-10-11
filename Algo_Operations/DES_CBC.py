@@ -2,7 +2,7 @@ from Crypto.Cipher import DES
 from Crypto.Util.Padding import pad
 from Crypto.Util.Padding import unpad
 
-class DES_CTR:
+class DES_CBC:
     def __init__(self, key, iv):
         self.key = pad(key, DES.block_size)
         self.iv = pad(iv, DES.block_size)

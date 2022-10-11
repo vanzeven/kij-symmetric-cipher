@@ -2,7 +2,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Util.Padding import unpad
 
-class AES_ECB:
+class AES_CFB:
     def __init__(self, key, iv):
         self.key = pad(key, AES.block_size)
         self.iv = pad(iv, AES.block_size)
