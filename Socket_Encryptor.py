@@ -20,4 +20,8 @@ class SocketEncyrptor:
         return self.operation.decrypt(self.algorithm, cipherbytes, self.key, self.iv)
 
 def GetSocketEncryptor():
-    return SocketEncyrptor(algorithm = DES(), operation = CTROperation(), key = 'sapiunta', iv = 4743744)
+    # DES ECB
+    return SocketEncyrptor(algorithm = DES(), operation = ECBOperation(), key = 'sapiunta', iv = None)
+
+    # DES CTR
+    # return SocketEncyrptor(algorithm = DES(), operation = CTROperation(), key = 'sapiunta', iv = 4743744)
