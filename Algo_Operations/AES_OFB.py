@@ -1,5 +1,4 @@
 from Crypto.Cipher import AES
-from Crypto.Cipher import DES
 from Crypto.Util.Padding import pad
 from Crypto.Util.Padding import unpad
 
@@ -9,7 +8,6 @@ class AES_OFB:
         self.iv = pad(iv, AES.block_size)
 
     def encrypt(self, plaintext):
-       # data_bytes = bytes(plaintext, 'utf-8')
         padded_bytes = pad(plaintext, AES.block_size)
         AES_obj = AES.new(self.key, AES.MODE_OFB, self.iv)
         chipertext = AES_obj.encrypt(padded_bytes)
