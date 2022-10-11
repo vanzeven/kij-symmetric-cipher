@@ -3,6 +3,8 @@ import time
 import os
 import inspect
 
+from Test.Writer import Writer
+
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir) 
 sys.path.insert(0, parentdir)
@@ -14,8 +16,11 @@ from Algo_Operations.AES_CBC import AES_CBC
 # key 8 byte
 # IV 8 byte
 
+writer = Writer()
+
 ciphertext=None
 total_time = 0
+counter = 0
 for i in range(10):
     start_time = time.time()
     for loop in range(1000):
@@ -24,11 +29,15 @@ for i in range(10):
         #print(encryptor.encrypt(b'aaaa'))
     interval_time = (time.time() - start_time)
     print("Waktu interval ke-%d adalah %s detik" % (i,interval_time))
+    writer.insert_to_array(counter, "Waktu interval ke-%d adalah %s detik" % (i,interval_time))
+    counter += 1
     total_time += interval_time
 
 average_time = total_time/10
 
-print("Waktu rata-rata enkripsi adalah %s detik" % average_time ) 
+print("Waktu rata-rata enkripsi adalah %s detik" % average_time )
+writer.insert_to_array(counter, "Waktu rata-rata enkripsi adalah %s detik" % average_time)
+counter += 1
 
 plaintext=None
 total_time = 0
@@ -40,8 +49,14 @@ for i in range(10):
         #print(encryptor.encrypt(b'aaaa'))
     interval_time = (time.time() - start_time)
     print("Waktu interval ke-%d adalah %s detik" % (i,interval_time))
+    writer.insert_to_array(counter, "Waktu interval ke-%d adalah %s detik" % (i, interval_time))
+    counter += 1
     total_time += interval_time
 
 average_time = total_time/10
 
 print("Waktu rata-rata dekripsi adalah %s detik" % average_time )
+writer.insert_to_array(counter, "Waktu rata-rata deskripsi adalah %s detik" % average_time)
+counter += 1
+
+writer.write_csv("AES_CBC.csv")
