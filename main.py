@@ -3,6 +3,7 @@ from Algorithms.DES import DES
 from Algorithms.RC4 import RC4
 from Crypto.Cipher import AES
 from Operations.ECBOperation import ECBOperation
+from Operations.CTROperation import CTROperation
 from Operations.OFBOperation import OFBOperation
 from Operations.CFBOperation import CFBOperation
 from Crypto.Util.Padding import pad
@@ -14,18 +15,36 @@ des = DES()
 des.setDebug(False)
 
 # DES Encryption
-cipherbytes = des.encrypt(bytes('plaintex', 'utf-8'), key)
+# cipherbytes = des.encrypt(bytes('plaintex', 'utf-8'), key)
 
-print('Cipher Bytes: ', cipherbytes)
+# print('Cipher Bytes: ', cipherbytes)
 
 # ECBOperation
+print('ECB Operation')
 ecb = ECBOperation()
 
-cipherbytes = ecb.encrypt(des, bytes(ciphertext, 'utf-8'), key)
-plainbytes = ecb.decrypt(des, cipherbytes, key)
+print('Plain Text: ', ciphertext)
 
+cipherbytes = ecb.encrypt(des, bytes(ciphertext, 'utf-8'), key)
 print('ECB Cipher Text: ', cipherbytes)
-print('ECB Plain Text: ', plainbytes)
+
+plainbytes = ecb.decrypt(des, cipherbytes, key)
+print('ECB Deciphered Text: ', plainbytes)
+
+print()
+
+# CTROperation
+print('CTR Operation')
+ctr = CTROperation()
+
+print('Plain Text: ', ciphertext)
+
+cipherbytes = ctr.encrypt(des, bytes(ciphertext, 'utf-8'), key, iv = 4743744)
+print('CTR Cipher Text: ', cipherbytes)
+
+plainbytes = ctr.decrypt(des, cipherbytes, key, iv = 4743744)
+print('CTR Deciphered Text: ', plainbytes)
+
 print()
 
 # OFBOperation
