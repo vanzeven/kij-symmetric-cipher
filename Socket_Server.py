@@ -20,10 +20,11 @@ class ProcessTheClient(threading.Thread):
     def run(self):
         data_received=""
         while True:
-            data = self.connection.recv(32)
+            data = self.connection.recv(1024)
             if data:
+                print('GOT: ', data)
                 data_received += data.decode()
-                if "\r\n\r\n" in data_received:
+                if "\r\n\r\n" in data_received[-64:]:
                     data_received.replace("\r\n\r\n", "")
                     hasil = fp.proses_string(data_received)
                     hasil=hasil+"\r\n\r\n"
