@@ -7,7 +7,7 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir) 
 sys.path.insert(0, parentdir)
 
-from Algo_Operations.DES_OFB import DES_CTR
+from Algo_Operations.AES_CFB import AES_ECB
 # Runtime loop dan avearge per iteration
 # Loop 100 kali
 # plaintext size = 64 char
@@ -19,7 +19,7 @@ total_time = 0
 for i in range(10):
     start_time = time.time()
     for loop in range(1000):
-        encryptor = DES_CTR(key = b'sapi',iv = b'4743')
+        encryptor = AES_ECB(key = b'sapisapi',iv = b'47433474')
         ciphertext = encryptor.encrypt(b'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ' * 256)
         #print(encryptor.encrypt(b'aaaa'))
     interval_time = (time.time() - start_time)
@@ -35,7 +35,7 @@ total_time = 0
 for i in range(10):
     start_time = time.time()
     for loop in range(1000):
-        encryptor = DES_CTR(key = b'sapi',iv = b'4743')
+        encryptor = AES_ECB(key = b'sapisapi',iv = b'47433474')
         plaintext = encryptor.decrypt(ciphertext)
         #print(encryptor.encrypt(b'aaaa'))
     interval_time = (time.time() - start_time)
@@ -44,4 +44,4 @@ for i in range(10):
 
 average_time = total_time/10
 
-print("Waktu rata-rata dekripsi adalah %s detik" % average_time ) 
+print("Waktu rata-rata dekripsi adalah %s detik" % average_time )

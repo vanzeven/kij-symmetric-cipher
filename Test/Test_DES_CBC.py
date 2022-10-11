@@ -7,7 +7,7 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir) 
 sys.path.insert(0, parentdir)
 
-from Algo_Operations.DES_OFB import DES_CTR
+from Algo_Operations.DES_CBC import DES_CTR
 # Runtime loop dan avearge per iteration
 # Loop 100 kali
 # plaintext size = 64 char
@@ -44,4 +44,4 @@ for i in range(10):
 
 average_time = total_time/10
 
-print("Waktu rata-rata dekripsi adalah %s detik" % average_time ) 
+print("Waktu rata-rata dekripsi adalah %s detik" % average_time )

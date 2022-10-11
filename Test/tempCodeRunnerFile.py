@@ -20,7 +20,7 @@ for i in range(10):
     start_time = time.time()
     for loop in range(1000):
         encryptor = DES_CTR(key = b'sapi',iv = b'4743')
-        ciphertext = encryptor.encrypt(b'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ' * 256)
+        ciphertext = encryptor.encrypt(b'aaaa')
         #print(encryptor.encrypt(b'aaaa'))
     interval_time = (time.time() - start_time)
     print("Waktu interval ke-%d adalah %s detik" % (i,interval_time))
@@ -44,4 +44,4 @@ for i in range(10):
 
 average_time = total_time/10
 
-print("Waktu rata-rata dekripsi adalah %s detik" % average_time ) 
+print("Waktu rata-rata dekripsi adalah %s detik" % average_time )

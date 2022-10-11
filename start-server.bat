@@ -1,1 +1,1 @@
-python3 Socket_Server.py
+python Socket_Server.py
