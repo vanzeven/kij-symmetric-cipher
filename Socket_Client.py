@@ -85,11 +85,15 @@ def remote_delete(filename=""):
     return False
 
 def remote_post(filename=""):
-    if not os.path.exists(filename):
+    global userpath
+
+    fullfilename =  os.path.join(userpath, filename)
+
+    if not os.path.exists(fullfilename):
         print(f"Gagal: file{filename} tidak ditemukan")
         return False
     
-    fp = open(f"{filename}",'rb')
+    fp = open(f"{fullfilename}",'rb')
     filecontent = base64.b64encode(fp.read()).decode()
     
     command_str=f"POST {filename} {filecontent}"
@@ -143,7 +147,7 @@ if __name__=='__main__':
         elif command == 'POST':
             print('Provide a file name to upload:')
             filename = input('> ')
-            remote_get(filename=filename)
+            remote_post(filename=filename)
         elif command == 'EXIT':
             running = False
         
