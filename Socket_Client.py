@@ -4,6 +4,7 @@ import base64
 import logging
 import os.path
 import os
+import math
 
 userpath = None
 
@@ -24,11 +25,20 @@ def send_command(command_str=""):
         offset = 0
         offsetSize = 1024
 
+        bytesendSize = len(bytesend)
+
+        lastProgress = 0
+        progress = 0
+
         while bytesend[offset:offset+offsetSize]:
             chunk = bytesend[offset:offset+offsetSize]
             sock.send(chunk)
 
-            print('Sending: ', chunk)
+            # print('Sending: ', chunk)
+            lastProgress = progress
+            progress = math.ceil(offset / bytesendSize * 100)
+            if lastProgress != progress and progress % 10 == 0:
+                print('Uploading: ', str(progress), '%')
 
             offset += offsetSize
 
