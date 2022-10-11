@@ -1,6 +1,6 @@
 import csv
 
-array = [None] * 10
+array = [None] * 12
 
 
 class Writer:
