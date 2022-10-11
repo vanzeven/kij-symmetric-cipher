@@ -3,6 +3,7 @@ import logging
 import shlex
 
 from Socket_FileHandler import FileHandler
+from Socket_Interface import FileInterface
 
 """
 * class FileProtocol bertugas untuk memproses 
