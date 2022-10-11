@@ -1,1 +1,4 @@
-test 12345678
+from Socket_Encryptor import GetSocketEncryptor
+
+encryptor = GetSocketEncryptor()
+print(encryptor.encrypt(b'plaintesplaintesplaintesplaintesplaintesplaintesplaintesplaintesplaintesplaintesplaintesplaintes'))

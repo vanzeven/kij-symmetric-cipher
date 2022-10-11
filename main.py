@@ -59,16 +59,16 @@ print('OFB Cipher Text: ', ciphertext)
 cfb = CFBOperation()
 
 # Encrypt
-key = pad(b"randomkey", AES.block_size)
-iv = pad(b"randomiv", AES.block_size)
-CFBchipertext = cfb.encrypt('AES', 'thisisplaintext', key, iv)
+#key = pad(b"randomkey", AES.block_size)
+#iv = pad(b"randomiv", AES.block_size)
+#CFBchipertext = cfb.encrypt('AES', 'thisisplaintext', key, iv)
 
-print('CFB Cipher Text: ', CFBchipertext)
+#print('CFB Cipher Text: ', CFBchipertext)
 
 # RC4
-RC4ciphertext = RC4().encrypt('plaintex', 'keyaakey')
-print('RC4 Cipher Text: ', RC4ciphertext)
+#RC4ciphertext = RC4().encrypt('plaintex', 'keyaakey')
+#print('RC4 Cipher Text: ', RC4ciphertext)
 
 # Decrypt
-CFBplaintext = cfb.decrypt('AES', CFBchipertext, key, iv)
-print('CFB Plain Text: ', CFBplaintext)
+#CFBplaintext = cfb.decrypt('AES', CFBchipertext, key, iv)
+#print('CFB Plain Text: ', CFBplaintext)
