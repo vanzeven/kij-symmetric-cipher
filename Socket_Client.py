@@ -19,12 +19,24 @@ def send_command(command_str=""):
         
         command_str += "\r\n\r\n"
         
-        sock.sendall(command_str.encode())
+        # sock.sendall(command_str.encode())
+        bytesend = command_str.encode()
+        offset = 0
+        offsetSize = 1024
+
+        while bytesend[offset:offset+offsetSize]:
+            chunk = bytesend[offset:offset+offsetSize]
+            sock.send(chunk)
+
+            print('Sending: ', chunk)
+
+            offset += offsetSize
+
         # Look for the response, waiting until socket is done (no more data)
         data_received="" #empty string
         while True:
             #socket does not receive all data at once, data comes in part, need to be concatenated at the end of process
-            data = sock.recv(16)
+            data = sock.recv(1024)
             if data:
                 #data is not empty, concat with previous content
                 data_received += data.decode()
