@@ -1,3 +1,5 @@
+from Socket_Encryptor import GetSocketEncryptor
+
 import socket
 import json
 import base64
@@ -7,6 +9,7 @@ import os
 import math
 
 userpath = None
+encryptor = GetSocketEncryptor()
 
 server_address=('localhost',7777)
 
@@ -85,7 +88,10 @@ def remote_get(filename=""):
     if (hasil['status']=='OK'):
         #proses file dalam bentuk base64 ke bentuk bytes
         namafile= hasil['data_namafile']
-        isifile = base64.b64decode(hasil['data_file'])
+        ciphercontent = base64.b64decode(hasil['data_file'])
+        plaincontent = encryptor.decrypt(ciphercontent)
+
+        isifile = plaincontent
         fp = open(os.path.join(userpath, namafile),'wb+')
         fp.write(isifile)
         fp.close()
@@ -116,7 +122,9 @@ def remote_post(filename=""):
         return False
     
     fp = open(f"{fullfilename}",'rb')
-    filecontent = base64.b64encode(fp.read()).decode()
+    plaincontent = fp.read()
+    ciphercontent = encryptor.encrypt(plaincontent)
+    filecontent = base64.b64encode(ciphercontent).decode()
     
     command_str=f"POST {filename} {filecontent}"
     hasil = send_command(command_str)
