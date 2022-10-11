@@ -3,6 +3,7 @@ import json
 import base64
 import logging
 import os.path
+import os
 
 server_address=('localhost',7777)
 
@@ -99,7 +100,7 @@ def remote_post(filename=""):
     return False
 
 def remote_help():
-    print("""Command:
+    print("""Available Command:
     HELP: show help
     LIST: show list of files in the server
     GET : download file from server
@@ -109,6 +110,14 @@ def remote_help():
 
 if __name__=='__main__':
     server_address=('localhost',6666)
+
+    print('Input your Username:')
+    username = input('> ')
+
+    basepath = 'files/'
+    userpath = os.path.join(basepath, username + '_files')
+
+    os.mkdir(userpath)
 
     remote_help()
 
