@@ -1,6 +1,7 @@
+from Algo_Operations.AES_OFB import AES_OFB
 from Algorithms.DES import DES
 from Algorithms.RC4 import RC4
-
+from Algo_Operations.DES_CTR import *
 from Operations.ECBOperation import ECBOperation
 from Operations.CTROperation import CTROperation
 from Operations.OFBOperation import OFBOperation
@@ -20,8 +21,13 @@ class SocketEncyrptor:
         return self.operation.decrypt(self.algorithm, cipherbytes, self.key, self.iv)
 
 def GetSocketEncryptor():
-    # DES ECB
-    return SocketEncyrptor(algorithm = DES(), operation = ECBOperation(), key = 'sapiunta', iv = None)
+    # ECB
+    #return SocketEncyrptor(algorithm = AES(), operation = ECBOperation(), key = 'sapiunta', iv = None)
+    #return SocketEncyrptor(algorithm = DES(), operation = ECBOperation(), key = 'sapiunta', iv = None)
 
-    # DES CTR
-    # return SocketEncyrptor(algorithm = DES(), operation = CTROperation(), key = 'sapiunta', iv = 4743744)
+    # CTR
+    #return SocketEncyrptor(algorithm = AES(), operation = CTROperation(), key = 'sapiunta', iv = 4743744)
+    #return SocketEncyrptor(algorithm = DES(), operation = CTROperation(), key = 'sapiunta', iv = 4743744)
+
+    # AES
+    return DES_CTR(key = b'sapiuntasapiunta',iv = b'sembaransembaran')
