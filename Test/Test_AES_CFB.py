@@ -37,7 +37,6 @@ for i in range(10):
     for loop in range(1000):
         encryptor = AES_CFB(key = b'sapisapi',iv = b'47433474')
         plaintext = encryptor.decrypt(ciphertext)
-        #print(encryptor.encrypt(b'aaaa'))
     interval_time = (time.time() - start_time)
     print("Waktu interval ke-%d adalah %s detik" % (i,interval_time))
     total_time += interval_time
