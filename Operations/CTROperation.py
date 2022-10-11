@@ -19,6 +19,7 @@ class CTROperation(Operation):
             counter += (iv * multiplier) % prime
 
             counterPlaintext = str(counter).zfill(8)
+            counterPlaintext = counterPlaintext[-8:]
 
             encryptedCounter = algorithmClass.encrypt(bytes(counterPlaintext, 'utf-8'), key)
 
@@ -49,6 +50,7 @@ class CTROperation(Operation):
             xoredChunk = ciphertext[i:i+8]
 
             counterPlaintext = str(counter).zfill(8)
+            counterPlaintext = counterPlaintext[-8:]
 
             encryptedCounter = algorithmClass.encrypt(bytes(counterPlaintext, 'utf-8'), key)
 
