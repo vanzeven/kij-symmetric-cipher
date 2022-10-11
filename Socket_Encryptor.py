@@ -1,4 +1,17 @@
+from Algo_Operations.AES_CBC import AES_CBC
+from Algo_Operations.AES_CFB import AES_CFB
+from Algo_Operations.AES_CTR import AES_CTR
+from Algo_Operations.AES_ECB import AES_ECB
 from Algo_Operations.AES_OFB import AES_OFB
+
+from Algo_Operations.DES_CBC import DES_CBC
+from Algo_Operations.DES_CFB import DES_CFB
+from Algo_Operations.DES_CTR import DES_CTR
+from Algo_Operations.DES_ECB import DES_ECB
+from Algo_Operations.DES_OFB import DES_OFB
+
+from Algo_Operations.RC4_STM import RC4_STM
+
 from Algorithms.DES import DES
 from Algorithms.RC4 import RC4
 from Algo_Operations.DES_CTR import *
@@ -21,13 +34,23 @@ class SocketEncyrptor:
         return self.operation.decrypt(self.algorithm, cipherbytes, self.key, self.iv)
 
 def GetSocketEncryptor():
-    # ECB
-    #return SocketEncyrptor(algorithm = AES(), operation = ECBOperation(), key = 'sapiunta', iv = None)
-    #return SocketEncyrptor(algorithm = DES(), operation = ECBOperation(), key = 'sapiunta', iv = None)
-
-    # CTR
-    #return SocketEncyrptor(algorithm = AES(), operation = CTROperation(), key = 'sapiunta', iv = 4743744)
-    #return SocketEncyrptor(algorithm = DES(), operation = CTROperation(), key = 'sapiunta', iv = 4743744)
+    encryptor = None
 
     # AES
-    return DES_CTR(key = b'sapiuntasapiunta',iv = b'sembaransembaran')
+    encryptor = AES_CBC(key = b'sapiunta',iv = b'sembaran')
+    # encryptor = AES_CFB(key = b'sapiunta',iv = b'sembaran')
+    # encryptor = AES_CTR(key = b'sapiunta',iv = b'sembaran')
+    # encryptor = AES_ECB(key = b'sapiunta',iv = b'sembaran')
+    # encryptor = AES_OFB(key = b'sapiunta',iv = b'sembaran')
+
+    # DES
+    # encryptor = DES_CBC(key = b'sapi',iv = b'semb')
+    # encryptor = DES_CFB(key = b'sapi',iv = b'semb')
+    # encryptor = DES_CTR(key = b'sapi',iv = b'semb')
+    # encryptor = DES_ECB(key = b'sapi',iv = b'semb')
+    # encryptor = DES_OFB(key = b'sapi',iv = b'semb')
+
+    # RC4
+    # encryptor = RC4_STM(key = b'sapi',iv = b'semb')
+
+    return encryptor
