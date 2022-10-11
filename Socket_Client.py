@@ -98,15 +98,46 @@ def remote_post(filename=""):
     print("Gagal")
     return False
 
+def remote_help():
+    print("""Command:
+    HELP: show help
+    LIST: show list of files in the server
+    GET : download file from server
+    POST: upload file to server
+    EXIT: exit interactive client
+    """)
 
 if __name__=='__main__':
     server_address=('localhost',6666)
-    remote_list()
+
+    remote_help()
+
+    running = True
+    while running:
+        print('Provide a command:')
+        command = input()
+        command = command.upper()
+
+        if command == 'LIST':
+            remote_list()
+        elif command == 'GET':
+            print('Provide a file name to download:')
+            filename = input()
+            remote_get(filename=filename)
+        elif command == 'HELP':
+            remote_help()
+        elif command == 'POST':
+            print('Provide a file name to upload:')
+            filename = input()
+            remote_get(filename=filename)
+        elif command == 'EXIT':
+            running = False
+        
     # post
-    remote_post(filename="Sky.png")
-    #delete
-    #remote_delete(filename="Sky.png")
-    #get
-    #remote_get(filename="Sky.png")
-    remote_list()
+    # remote_post(filename="Sky.png")
+    # delete
+    # remote_delete(filename="Sky.png")
+    # get
+    # remote_get(filename="Sky.png")
+    # remote_list()
 
