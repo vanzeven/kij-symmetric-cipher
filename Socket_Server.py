@@ -22,7 +22,8 @@ class ProcessTheClient(threading.Thread):
         while True:
             data = self.connection.recv(1024)
             if data:
-                print('GOT: ', data)
+                # print('GOT: ', data)
+                # print('GOT: ', len(data_received), 'data')
                 data_received += data.decode()
                 if "\r\n\r\n" in data_received[-64:]:
                     data_received.replace("\r\n\r\n", "")
