@@ -1,6 +1,6 @@
 import binascii
 from Algorithms.DES import DES
-from Algorithms.RC4 import RC4
+from Algorithms.ARC4 import RC4
 from Crypto.Cipher import AES
 from Operations.ECBOperation import ECBOperation
 from Operations.CTROperation import CTROperation
@@ -66,8 +66,10 @@ CFBchipertext = cfb.encrypt('AES', 'thisisplaintext', key, iv)
 print('CFB Cipher Text: ', CFBchipertext)
 
 # RC4
-RC4ciphertext = RC4().encrypt('plaintex', 'keyaakey')
+RC4ciphertext = RC4().encrypt('plaintext', 'keyaakey')
 print('RC4 Cipher Text: ', RC4ciphertext)
+RC4plain = RC4().decrypt(RC4ciphertext, 'keyaakey')
+print('RC4 Plain Text: ', RC4plain)
 
 # Decrypt
 CFBplaintext = cfb.decrypt('AES', CFBchipertext, key, iv)
