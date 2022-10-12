@@ -141,45 +141,56 @@ def remote_help():
     print("""Available Command:
     HELP: show help
     LIST: show list of files in the server
-    GET : download file from server
-    POST: upload file to server
+    GET : download file from the server
+    POST: upload file to the server
+    DELETE: delete file on the server
+    LOGOUT: logout currently active client
     EXIT: exit interactive client
     """)
 
 if __name__=='__main__':
     server_address=('localhost',6666)
 
-    print('Input your Username:')
-    username = input('> ')
-
-    basepath = 'files/'
-    userpath = os.path.join(basepath, username + '_files')
-
-    if os.path.exists(userpath) == False:
-        os.mkdir(userpath)
-
-    remote_help()
-
     running = True
     while running:
-        print('Provide a command:')
-        command = input('> ')
-        command = command.upper()
+        print('Input your Username:')
+        username = input('> ')
 
-        if command == 'LIST':
-            remote_list()
-        elif command == 'GET':
-            print('Provide a file name to download:')
-            filename = input('> ')
-            remote_get(filename=filename)
-        elif command == 'HELP':
-            remote_help()
-        elif command == 'POST':
-            print('Provide a file name to upload:')
-            filename = input('> ')
-            remote_post(filename=filename)
-        elif command == 'EXIT':
-            running = False
+        basepath = 'files/'
+        userpath = os.path.join(basepath, username + '_files')
+
+        if os.path.exists(userpath) == False:
+            os.mkdir(userpath)
+
+        remote_help()
+
+        loggingin = True
+        while loggingin:
+            print('Provide a command:')
+            command = input('> ')
+            command = command.upper()
+
+            if command == 'LIST':
+                remote_list()
+            elif command == 'GET':
+                print('Provide a file name to download:')
+                filename = input('> ')
+                remote_get(filename=filename)
+            elif command == 'HELP':
+                remote_help()
+            elif command == 'POST':
+                print('Provide a file name to upload:')
+                filename = input('> ')
+                remote_post(filename=filename)
+            elif command == 'DELETE':
+                print('Provide a file name to delete:')
+                filename = input('> ')
+                remote_delete(filename=filename)
+            elif command == 'LOGOUT':
+                loggingin = False
+            elif command == 'EXIT':
+                running = False
+                loggingin = false
         
     # post
     # remote_post(filename="Sky.png")
