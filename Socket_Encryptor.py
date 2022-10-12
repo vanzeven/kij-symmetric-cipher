@@ -1,23 +1,16 @@
-from Algo_Operations.AES_CFB import AES_CBC
-from Algo_Operations.AES_CFB import AES_ECB
+from Algo_Operations.AES_CBC import AES_CBC
+from Algo_Operations.AES_CFB import AES_CFB
 from Algo_Operations.AES_CTR import AES_CTR
-from Algo_Operations.AES_ECB import AES_CTR
+from Algo_Operations.AES_ECB import AES_ECB
 from Algo_Operations.AES_OFB import AES_OFB
 
-from Algo_Operations.DES_CBC import DES_CTR
+from Algo_Operations.DES_CBC import DES_CBC
 from Algo_Operations.DES_CFB import DES_CFB
 from Algo_Operations.DES_CTR import DES_CTR
 from Algo_Operations.DES_ECB import DES_ECB
-from Algo_Operations.DES_OFB import DES_CTR
+from Algo_Operations.DES_OFB import DES_OFB
 
 from Algo_Operations.RC4_STM import RC4_STM
-
-from Algorithms.DES import DES
-from Algo_Operations.DES_CTR import *
-from Operations.ECBOperation import ECBOperation
-from Operations.CTROperation import CTROperation
-from Operations.OFBOperation import OFBOperation
-from Operations.CFBOperation import CFBOperation
 
 class SocketEncyrptor:
     def __init__(self, algorithm, operation, key, iv):
